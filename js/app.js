@@ -20,16 +20,44 @@ function startGame() {
     document.location.reload();
 }
 
-function clickedCard() {
-    $('.card').on('click', function () {
-        $(this).addClass('show');
-        $(this).addClass('open');
-    })
-}
-clickedCard();
+let cardList = [];
+
+let cardMatched = 0;
+
+$('.card').on('click', function () {
+    $(this).addClass('show');
+    $(this).addClass('open');
+    $(this).addClass('click-none');
+    cardList.push(this);
 
 
-// if ()
+    if (cardList.length === 2) {
+        let cardOne = cardList[0].firstElementChild.classList[1];
+        let cardTwo = cardList[1].firstElementChild.classList[1];
+        if (cardOne === cardTwo) {
+            cardList[0].classList.add('match');
+            cardList[1].classList.add('match');
+            cardList[0].classList.remove('open', 'show');
+            cardList[1].classList.remove('open', 'show');
+            cardMatched++;
+            cardList = [];
+        } else {
+            cardList[0].classList.remove('open', 'show', 'match');
+            cardList[1].classList.remove('open', 'show', 'match');
+            cardList[1].classList.add('unmatched');
+            cardList[0].classList.add('unmatched');
+            setTimeout(function () {
+                cardList[0].classList.remove("show", "open", 'click-none', "unmatched");
+                cardList[1].classList.remove("show", "open", 'click-none', "unmatched");
+                cardList = [];
+            }, 1100);
+
+
+        }
+
+    }
+})
+
 
 
 
@@ -58,6 +86,10 @@ function shuffle(array) {
 
     return array;
 }
+
+
+
+
 
 
 
