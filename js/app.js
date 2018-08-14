@@ -21,7 +21,7 @@ function startGame() {
 }
 
 let cardList = [];
-
+let count = 0;
 let cardMatched = 0;
 
 $('.card').on('click', function () {
@@ -31,9 +31,12 @@ $('.card').on('click', function () {
     cardList.push(this);
 
 
+
     if (cardList.length === 2) {
         let cardOne = cardList[0].firstElementChild.classList[1];
         let cardTwo = cardList[1].firstElementChild.classList[1];
+        count++;
+        moveCount()
         if (cardOne === cardTwo) {
             cardList[0].classList.add('match');
             cardList[1].classList.add('match');
@@ -41,6 +44,7 @@ $('.card').on('click', function () {
             cardList[1].classList.remove('open', 'show');
             cardMatched++;
             cardList = [];
+            starRating();
         } else {
             cardList[0].classList.remove('open', 'show', 'match');
             cardList[1].classList.remove('open', 'show', 'match');
@@ -57,6 +61,39 @@ $('.card').on('click', function () {
 
     }
 })
+
+function moveCount() {
+    document.querySelector('.moves').innerHTML = count;
+}
+
+
+// Star Rating Function
+function starRating() {
+    if (cardMatched === 3) {
+        let unordered = document.querySelector('.stars');
+        let starList = unordered.firstElementChild;
+        let starClassList = starList.firstElementChild.classList;
+        starClassList.add("rated-star");
+    } else if (cardMatched === 6) {
+        let unordered = document.querySelector('.stars');
+        let starList = unordered.firstElementChild;
+        let secondList = starList.nextElementSibling;
+        let secondStar = secondList.firstElementChild;
+        secondStar.classList.add("rated-star");
+    } else if (cardMatched === 8) {
+        let unordered = document.querySelector('.stars');
+        let starList = unordered.firstElementChild;
+        let secondList = starList.nextElementSibling;
+        let thirdList = secondList.nextElementSibling;
+        let thirdStar = thirdList.firstElementChild;
+        thirdStar.classList.add("rated-star");
+        setTimeout(function () {
+            alert("Congratulations, you have completed the game. You made " + count + " moves");
+        }, 2000);
+
+    }
+}
+
 
 
 
