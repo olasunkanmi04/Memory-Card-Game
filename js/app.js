@@ -19,7 +19,6 @@ function createCard() {
 }
 createCard();
 
-
 //TODO: to start game
 function startGame() {
     shuffle(cardIcons);
@@ -117,7 +116,6 @@ document.querySelector('.deck').addEventListener('click', function (e) {
 function countMoves() {
     document.querySelector('.moves').innerHTML = moveCount;
 }
-
 
 // Star Rating Function
 function starRating() {
