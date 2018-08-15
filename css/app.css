@@ -218,6 +218,7 @@ h1 {
 
 .modal-text-header {
     text-align: center;
+    margin: 0 auto;
     font-weight: 600;
     font-size: 24px;
 }
@@ -226,16 +227,27 @@ h1 {
     text-align: center;
 }
 
-.modal-play-again {
-    color: #02ccba;
+.modal-play-wrapper {
     text-align: center;
-    text-decoration: none;
-    margin: 0 auto;
-    cursor: pointer;
 }
 
-.modal-play-again:hove {
-    color: #03857a;
+.modal-play-again {
+    color: #ffffff;
+    text-align: center;
+    font-weight: 600;
+    font-size: 24px;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: #03857a;
+    width: 30%;
+    border-radius: 3px;
+    padding: 16px 0;
+    border: none;
+}
+
+.modal-play-again:hover {
+    background-color: #03aa9c;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
 }
 
 /* ----------------------------------------------
