@@ -86,7 +86,7 @@ h1 {
     -webkit-animation-name: bounce;
     animation-duration: 2s;
     animation-fill-mode: both;
-    animation-iteration-count: 2s;
+    animation-iteration-count: 2;
 }
 
 @keyframes bounce {
