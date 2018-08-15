@@ -24,7 +24,7 @@ function startGame() {
 // Start game again
 document.querySelector('.restart').addEventListener('click', startGame);
 
-// endGame function to stop the timer and launch Modal
+//TODO endGame function to stop the timer and launch Modal
 function endGame() {
     if (matchedCard === 8) {
         stopTime();
@@ -40,6 +40,14 @@ let timerInterval;
 let firstClick = false;
 let minutes = 0;
 let seconds = 0;
+// rating stars
+let currentStars = `<li><i class='fa fa-star'></i></li><li>
+<i class="fa fa-star"></i>
+</li>
+<li>
+<i class="fa fa-star"></i>
+</li>`;
+document.querySelector('.stars').innerHTML = currentStars;
 
 // Card click logic
 document.querySelector('.deck').addEventListener('click', function (e) {
@@ -100,24 +108,27 @@ function countMoves() {
 // Star Rating Function
 function starRating() {
     // removes a star at different move count
-    if (moveCount === 9) {
+    if (moveCount === 12) {
         let unordered = document.querySelector('.stars');
         let starList = unordered.firstElementChild;
         let starClassList = starList.firstElementChild.classList;
-        starClassList.add("rated-star");
-    } else if (moveCount === 15) {
+        currentStars = `<li><i class='fa fa-star'></i></li><li>
+        <i class="fa fa-star"></i>
+        </li>`;
+
+        document.querySelector('.stars').innerHTML = currentStars;
+
+    } else if (moveCount === 18) {
         let unordered = document.querySelector('.stars');
         let starList = unordered.firstElementChild;
         let secondList = starList.nextElementSibling;
         let secondStar = secondList.firstElementChild;
-        secondStar.classList.add("rated-star");
+        currentStars = `<li><i class='fa fa-star'></i></li>`;
+
+        document.querySelector('.stars').innerHTML = currentStars;
+
     }
 }
-
-
-
-
-
 
 // Function to start timer
 function startTime() {
@@ -146,14 +157,16 @@ function launchModal() {
     setTimeout(function () {
         document.querySelector('.modal').classList.remove('show-modal');
         document.querySelector('.modal-play-again').addEventListener('click', startGame);
+        // Displays congratulatory message with scores
         document.querySelector('.modal-text').innerHTML =
-            "You made " + count + " moves in " + document.querySelector('.timer').innerHTML + " time";
+            "You made " + moveCount + " moves in " + document.querySelector('.timer').innerHTML + " time and your rating is " + currentStars;
     }, 2000);
     // close modal upon click
     document.querySelector('.close-modal').addEventListener('click', function () {
         document.querySelector('.modal').classList.add('show-modal');
     })
 }
+
 
 /*
  * Display the cards on the page
