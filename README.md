@@ -1,9 +1,9 @@
 # Memory Game Project
-This is a card game that randomly shuffles the cards. A user clicks cards to get two matched cards. A user wins once all cards have successfully been matched
+This is a card game where cards are randomly shuffled. A user clicks on a card and another card to get two matched cards. User wins once all cards have successfully been matched
 ## Table of Contents
 
-* [How to play](#How to play)
-* [Dependencies](#Dependencies)
+* [How to play](#instructions)
+* [Dependencies](#dependencies)
 
 ## How to play
 
@@ -21,13 +21,13 @@ This project was built with HTML, CSS and JavaScript.
 HTML and CSS for a static version of the game while JavaScript for interaction.
 Dependencies used are:
 
-* [Font Awesome](http://fontawesome.io)
-* [Google Font](https://fonts.google.com/)
+* [Font Awesome](http://fontawesome.io) - Icons collection
+* [Google Font](https://fonts.google.com/) - Typography collection
 
 ## Authors
 
-* Alabi Olasunkanmi
-* Initial template for Udacity
+* **Alabi Olasunkanmi**
+Initial template from Udacity
 
 ## Acknowledgments
 
