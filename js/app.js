@@ -2,95 +2,115 @@
  * Create a list that holds all of your cards
  */
 
-let cardIcons = ["diamond", "bomb", "paper-plane-o", "anchor", "bolt", "cube", "leaf", "bicycle", "diamond", "bomb", "paper-plane-o", "anchor", "bolt", "cube", "leaf", "bicycle"];
+// Array of card icons
+let icons = ["diamond", "bomb", "paper-plane-o", "anchor", "bolt", "cube", "leaf", "bicycle"];
+let cardIcons = icons.concat(icons);
 
+// shuffle card Icons
 let shuffledIcons = shuffle(cardIcons);
-
-
+// add the cards to the page
 for (let i = 0; i < 16; i++) {
     let card = document.createElement('li');
-
     card.classList.add('card');
     card.innerHTML = "<i class= 'fa fa-" + shuffledIcons[i] + "'></i>";
-
     document.querySelector('.deck').appendChild(card);
 }
 
+
+// start Game function to start game
 function startGame() {
     document.location.reload();
 }
+// Start game again
+document.querySelector('.restart').addEventListener('click', startGame);
 
+// endGame function to stop the timer and launch Modal
+function endGame() {
+    if (matchedCard === 8) {
+        stopTime();
+        launchModal();
+    }
+}
+
+// variables used
 let cardList = [];
-let count = 0;
-let cardMatched = 0;
+let moveCount = 0;
+let matchedCard = 0;
+let timerInterval;
+let firstClick = false;
+let minutes = 0;
+let seconds = 0;
 
-$('.card').on('click', function () {
-    $(this).addClass('show');
-    $(this).addClass('open');
-    $(this).addClass('click-none');
-    cardList.push(this);
+// Card click logic
+document.querySelector('.deck').addEventListener('click', function (e) {
+    if (e.target.nodeName == 'LI') {
+        // target the card been clicked
+        e.target.classList.add('show');
+        e.target.classList.add('open');
+        e.target.classList.add('click-none');
+        // pass clicked cards into cardList array
+        cardList.push(e.target);
+        startTime();
 
-
-
-    if (cardList.length === 2) {
-        let cardOne = cardList[0].firstElementChild.classList[1];
-        let cardTwo = cardList[1].firstElementChild.classList[1];
-        count++;
-        moveCount()
-        if (cardOne === cardTwo) {
-            cardList[0].classList.add('match');
-            cardList[1].classList.add('match');
-            cardList[0].classList.remove('open', 'show');
-            cardList[1].classList.remove('open', 'show');
-            cardMatched++;
-            cardList = [];
+        // I dentify two cards has been clicked
+        if (cardList.length === 2) {
+            let cardOne = cardList[0].firstElementChild.classList[1];
+            let cardTwo = cardList[1].firstElementChild.classList[1];
+            moveCount++;
+            countMoves();
             starRating();
-        } else {
-            cardList[0].classList.remove('open', 'show', 'match');
-            cardList[1].classList.remove('open', 'show', 'match');
-            cardList[1].classList.add('unmatched');
-            cardList[0].classList.add('unmatched');
-            setTimeout(function () {
-                cardList[0].classList.remove("show", "open", 'click-none', "unmatched");
-                cardList[1].classList.remove("show", "open", 'click-none', "unmatched");
-                cardList = [];
-            }, 1100);
 
+            // check if clicked cards' icons match
+            if (cardOne === cardTwo) {
+                // add class match if clicked cards matches and remove open and show classes
+                cardList[0].classList.add('match');
+                cardList[1].classList.add('match');
+                cardList[0].classList.remove('open', 'show');
+                cardList[1].classList.remove('open', 'show');
+                // counts number of matches
+                matchedCard++;
+                cardList = [];
+                endGame();
+            } else {
+                // remove class open and show if cards don't match and add unmatched class
+                cardList[0].classList.remove('open', 'show', 'match');
+                cardList[1].classList.remove('open', 'show', 'match');
+                cardList[1].classList.add('unmatched');
+                cardList[0].classList.add('unmatched');
+                // sets timeout so the code can rerun on another click
+                setTimeout(function () {
+                    cardList[0].classList.remove("show", "open", 'click-none', "unmatched");
+                    cardList[1].classList.remove("show", "open", 'click-none', "unmatched");
+                    cardList = [];
+                }, 1100);
+
+
+            }
 
         }
-
     }
 })
 
-function moveCount() {
-    document.querySelector('.moves').innerHTML = count;
+// add counts to score board
+function countMoves() {
+    document.querySelector('.moves').innerHTML = moveCount;
 }
 
 
 // Star Rating Function
 function starRating() {
-    if (cardMatched === 3) {
+    // removes a star at different move count
+    if (moveCount === 9) {
         let unordered = document.querySelector('.stars');
         let starList = unordered.firstElementChild;
         let starClassList = starList.firstElementChild.classList;
         starClassList.add("rated-star");
-    } else if (cardMatched === 6) {
+    } else if (moveCount === 15) {
         let unordered = document.querySelector('.stars');
         let starList = unordered.firstElementChild;
         let secondList = starList.nextElementSibling;
         let secondStar = secondList.firstElementChild;
         secondStar.classList.add("rated-star");
-    } else if (cardMatched === 8) {
-        let unordered = document.querySelector('.stars');
-        let starList = unordered.firstElementChild;
-        let secondList = starList.nextElementSibling;
-        let thirdList = secondList.nextElementSibling;
-        let thirdStar = thirdList.firstElementChild;
-        thirdStar.classList.add("rated-star");
-        setTimeout(function () {
-            alert("Congratulations, you have completed the game. You made " + count + " moves");
-        }, 2000);
-
     }
 }
 
@@ -98,8 +118,42 @@ function starRating() {
 
 
 
-document.querySelector('.restart').addEventListener('click', startGame);
 
+// Function to start timer
+function startTime() {
+    if (!firstClick) {
+        firstClick = true;
+        timerInterval = setInterval(updateTime, 1000);
+    }
+}
+// function to update Timer
+function updateTime() {
+    seconds++;
+    if (seconds === 60) {
+        minutes++;
+        seconds = 0;
+    }
+    document.querySelector('.timer').innerHTML = minutes + "mins " + seconds + "secs";
+}
+// function to stop timer when the game is won
+function stopTime() {
+    clearInterval(timerInterval);
+}
+
+// function for launching congratulatory modal
+function launchModal() {
+    // Time for modal to launch after last match as beem made
+    setTimeout(function () {
+        document.querySelector('.modal').classList.remove('show-modal');
+        document.querySelector('.modal-play-again').addEventListener('click', startGame);
+        document.querySelector('.modal-text').innerHTML =
+            "You made " + count + " moves in " + document.querySelector('.timer').innerHTML + " time";
+    }, 2000);
+    // close modal upon click
+    document.querySelector('.close-modal').addEventListener('click', function () {
+        document.querySelector('.modal').classList.add('show-modal');
+    })
+}
 
 /*
  * Display the cards on the page

@@ -84,9 +84,9 @@ h1 {
     font-size: 33px;
     animation-name: bounce;
     -webkit-animation-name: bounce;
-    animation-duration: 2.5s;
+    animation-duration: 2s;
     animation-fill-mode: both;
-    animation-iteration-count: 2.5s;
+    animation-iteration-count: 2s;
 }
 
 @keyframes bounce {
@@ -114,7 +114,7 @@ h1 {
     font-size: 33px;
     -webkit-animation: wobble;
     animation-name: wobble;
-    animation-duration: 2.5s;
+    animation-duration: 2s;
     animation-fill-mode: both;
     animation-iteration-count: infinite;
 }
@@ -150,10 +150,6 @@ h1 {
     }
 }
 
-.rated-star {
-    color: yellow;
-}
-
 .click-none {
     pointer-events: none;
 }
@@ -183,6 +179,66 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+
+.rated-star {
+    display: none;
+}
+
+.time {
+    margin-left: 20px;
+}
+
+/* Styles for modal */
+
+.modal {
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.show-modal {
+    display: none;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    margin: 10% auto;
+    width: 60%;
+    padding: 20px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.2)
+}
+
+.close-modal {
+    float: right;
+    cursor: pointer;
+    width: 30px;
+}
+
+.modal-text-header {
+    text-align: center;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.modal-text {
+    text-align: center;
+}
+
+.modal-play-again {
+    color: #02ccba;
+    text-align: center;
+    text-decoration: none;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.modal-play-again:hove {
+    color: #03857a;
 }
 
 /* ----------------------------------------------
