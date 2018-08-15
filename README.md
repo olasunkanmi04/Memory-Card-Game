@@ -27,7 +27,7 @@ Dependencies used are:
 ## Authors
 
 * **Alabi Olasunkanmi**
-Initial template from Udacity
+-With initial template from Udacity
 
 ## Acknowledgments
 
