@@ -70,8 +70,8 @@ h1 {
     transform: rotateY(0);
     background: #02b3e4;
     cursor: default;
-    -webkit-animation: flip-vertical-fwd 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
-    animation: flip-vertical-fwd 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+    -webkit-animation: flip-vertical-fwd 0.1s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+    animation: flip-vertical-fwd 0.1s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
 }
 
 .deck .card.show {

@@ -9,17 +9,35 @@ let cardIcons = icons.concat(icons);
 // shuffle card Icons
 let shuffledIcons = shuffle(cardIcons);
 // add the cards to the page
-for (let i = 0; i < 16; i++) {
-    let card = document.createElement('li');
-    card.classList.add('card');
-    card.innerHTML = "<i class= 'fa fa-" + shuffledIcons[i] + "'></i>";
-    document.querySelector('.deck').appendChild(card);
+function createCard() {
+    for (let i = 0; i < 16; i++) {
+        let card = document.createElement('li');
+        card.classList.add('card');
+        card.innerHTML = "<i class= 'fa fa-" + shuffledIcons[i] + "'></i>";
+        document.querySelector('.deck').appendChild(card);
+    }
 }
+createCard();
 
 
 // start Game function to start game
 function startGame() {
-    document.location.reload();
+    document.querySelector('.deck').innerHTML = "";
+    createCard();
+    moveCount = 0;
+    matchedCard = 0;
+    minutes = 0;
+    seconds = 0;
+    firstClick = false;
+    document.querySelector('.timer').innerHTML = minutes + "mins " + seconds + "secs";
+    cardList = [];
+    currentStars = `<li><i class='fa fa-star'></i></li><li><i class="fa fa-star"></i></li> <li> <i class="fa fa-star"></i></li>`;
+    document.querySelector('.stars').innerHTML = currentStars;
+    document.querySelector('.moves').innerHTML = moveCount;
+    clearInterval(timerInterval);
+
+    // let listWrapper = document.querySelector('.card');
+    // listWrapper.children.classList.remove('show', 'open', 'match', 'unmatched', 'click-none');
 }
 // Start game again
 document.querySelector('.restart').addEventListener('click', startGame);
@@ -90,9 +108,7 @@ document.querySelector('.deck').addEventListener('click', function (e) {
                     cardList[0].classList.remove("show", "open", 'click-none', "unmatched");
                     cardList[1].classList.remove("show", "open", 'click-none', "unmatched");
                     cardList = [];
-                }, 1100);
-
-
+                }, 350);
             }
 
         }
@@ -109,22 +125,13 @@ function countMoves() {
 function starRating() {
     // removes a star at different move count
     if (moveCount === 12) {
-        let unordered = document.querySelector('.stars');
-        let starList = unordered.firstElementChild;
-        let starClassList = starList.firstElementChild.classList;
         currentStars = `<li><i class='fa fa-star'></i></li><li>
         <i class="fa fa-star"></i>
         </li>`;
-
         document.querySelector('.stars').innerHTML = currentStars;
 
     } else if (moveCount === 18) {
-        let unordered = document.querySelector('.stars');
-        let starList = unordered.firstElementChild;
-        let secondList = starList.nextElementSibling;
-        let secondStar = secondList.firstElementChild;
         currentStars = `<li><i class='fa fa-star'></i></li>`;
-
         document.querySelector('.stars').innerHTML = currentStars;
 
     }
