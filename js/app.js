@@ -20,17 +20,17 @@ for (let i = 0; i < 16; i++) {
 // start Game function to start game
 function startGame() {
     document.location.reload();
-}
+};
 // Start game again
 document.querySelector('.restart').addEventListener('click', startGame);
 
-//TODO endGame function to stop the timer and launch Modal
+//TODO: function to stop the timer and launch Modal
 function endGame() {
     if (matchedCard === 8) {
         stopTime();
         launchModal();
     }
-}
+};
 
 // variables used
 let cardList = [];
@@ -97,12 +97,12 @@ document.querySelector('.deck').addEventListener('click', function (e) {
 
         }
     }
-})
+});
 
 // add counts to score board
 function countMoves() {
     document.querySelector('.moves').innerHTML = moveCount;
-}
+};
 
 
 // Star Rating Function
@@ -128,7 +128,7 @@ function starRating() {
         document.querySelector('.stars').innerHTML = currentStars;
 
     }
-}
+};
 
 // Function to start timer
 function startTime() {
@@ -136,7 +136,7 @@ function startTime() {
         firstClick = true;
         timerInterval = setInterval(updateTime, 1000);
     }
-}
+};
 // function to update Timer
 function updateTime() {
     seconds++;
@@ -145,11 +145,11 @@ function updateTime() {
         seconds = 0;
     }
     document.querySelector('.timer').innerHTML = minutes + "mins " + seconds + "secs";
-}
+};
 // function to stop timer when the game is won
 function stopTime() {
     clearInterval(timerInterval);
-}
+};
 
 // function for launching congratulatory modal
 function launchModal() {
@@ -165,7 +165,7 @@ function launchModal() {
     document.querySelector('.close-modal').addEventListener('click', function () {
         document.querySelector('.modal').classList.add('show-modal');
     })
-}
+};
 
 
 /*
@@ -189,12 +189,7 @@ function shuffle(array) {
     }
 
     return array;
-}
-
-
-
-
-
+};
 
 
 
