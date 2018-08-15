@@ -20,8 +20,9 @@ function createCard() {
 createCard();
 
 
-// start Game function to start game
+//TODO: to start game
 function startGame() {
+    shuffle(cardIcons);
     document.querySelector('.deck').innerHTML = "";
     createCard();
     moveCount = 0;
@@ -35,11 +36,8 @@ function startGame() {
     document.querySelector('.stars').innerHTML = currentStars;
     document.querySelector('.moves').innerHTML = moveCount;
     clearInterval(timerInterval);
-
-    // let listWrapper = document.querySelector('.card');
-    // listWrapper.children.classList.remove('show', 'open', 'match', 'unmatched', 'click-none');
 }
-// Start game again
+//TODO: to clear and restart game
 document.querySelector('.restart').addEventListener('click', startGame);
 
 //TODO: function to stop the timer and launch Modal
@@ -162,17 +160,22 @@ function stopTime() {
 function launchModal() {
     // Time for modal to launch after last match as beem made
     setTimeout(function () {
-        document.querySelector('.modal').classList.remove('show-modal');
-        document.querySelector('.modal-play-again').addEventListener('click', startGame);
+        document.querySelector('.modal').classList.remove('close-modal');
         // Displays congratulatory message with scores
         document.querySelector('.modal-text').innerHTML =
-            "You made " + moveCount + " moves in " + document.querySelector('.timer').innerHTML + " time and your rating is " + currentStars;
+            "You made " + moveCount + " moves in " + document.querySelector('.timer').innerHTML + " and your rating is " + currentStars;
     }, 2000);
     // close modal upon click
-    document.querySelector('.close-modal').addEventListener('click', function () {
-        document.querySelector('.modal').classList.add('show-modal');
+    document.querySelector('.close-modal-btn ').addEventListener('click', function () {
+        document.querySelector('.modal').classList.add('close-modal');
     })
 }
+
+// TODO: restart the game when clicked and close the modal
+document.querySelector('.modal-play-again').addEventListener('click', function () {
+    startGame();
+    document.querySelector('.modal').classList.add('close-modal');
+});
 
 
 /*

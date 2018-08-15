@@ -198,7 +198,7 @@ h1 {
     z-index: 1;
 }
 
-.show-modal {
+.close-modal {
     display: none;
 }
 
@@ -210,7 +210,7 @@ h1 {
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.2)
 }
 
-.close-modal {
+.close-modal-btn {
     float: right;
     cursor: pointer;
     width: 30px;
